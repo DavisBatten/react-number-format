@@ -10,6 +10,16 @@ describe('NumberFormat as text', () => {
     expect(wrapper.find('span').text()).toEqual('$2,456,981');
   });
 
+  it('should format numbers to negative (type minus) currency', () => {
+    const wrapper = shallow(<NumberFormat value={-2456981} displayType="text" thousandSeparator={true} prefix="$" />);
+    expect(wrapper.find('span').text()).toEqual('-$2,456,981');
+  });
+
+  it('should format numbers to negative (type parentheses) currency', () => {
+    const wrapper = shallow(<NumberFormat value={-2456981} displayType="text" thousandSeparator={true} prefix="$" negationFormat="parentheses" />);
+    expect(wrapper.find('span').text()).toEqual('($2,456,981)');
+  });
+
   it('should format as given format', () => {
     const wrapper = shallow(<NumberFormat value={4111111111111111} displayType={'text'} format="#### #### #### ####" />);
     expect(wrapper.find('span').text()).toEqual('4111 1111 1111 1111');
@@ -31,7 +41,7 @@ describe('NumberFormat as text', () => {
   });
 
   it('should limit decimal scale to given value', () => {
-    const wrapper = shallow(<NumberFormat value={4111.344} displayType={'text'} decimalScale={2}/>);
+    const wrapper = shallow(<NumberFormat value={4111.344} displayType={'text'} decimalScale={2} />);
     expect(wrapper.find('span').text()).toEqual('4111.34');
 
     wrapper.setProps({
@@ -43,7 +53,7 @@ describe('NumberFormat as text', () => {
   });
 
   it('it should add zeros if fixedDecimalScale is provided', () => {
-    const wrapper = shallow(<NumberFormat value="4111.11" displayType={'text'} decimalScale={4} fixedDecimalScale={true}/>);
+    const wrapper = shallow(<NumberFormat value="4111.11" displayType={'text'} decimalScale={4} fixedDecimalScale={true} />);
     expect(wrapper.find('span').text()).toEqual('4111.1100');
 
     wrapper.setProps({

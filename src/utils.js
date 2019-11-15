@@ -1,8 +1,8 @@
 //@flow
 
 // basic noop function
-export function noop(){}
-export function returnTrue(){ return true; }
+export function noop() { }
+export function returnTrue() { return true; }
 
 export function charIsNumber(char?: string) {
   return !!(char || '').match(/\d/);
@@ -10,6 +10,10 @@ export function charIsNumber(char?: string) {
 
 export function escapeRegExp(str: string) {
   return str.replace(/[-[\]/{}()*+?.\\^$|]/g, "\\$&");
+}
+
+export function negativeRegExp(negationFormat: string) {
+  return negationFormat === 'parentheses' ? /\(/ : /-/;
 }
 
 export function getThousandsGroupRegex(thousandsGroupStyle: string) {
@@ -29,6 +33,14 @@ export function applyThousandSeparator(str: string, thousandSeparator: string, t
   let index = str.search(/[1-9]/);
   index = index === -1 ? str.length : index;
   return str.substring(0, index) + str.substring(index, str.length).replace(thousandsGroupRegex, '$1' + thousandSeparator);
+}
+
+export function getNegationPrefixSymbol(negationFormat: string) {
+  return negationFormat === 'parentheses' ? '(' : '-';
+}
+
+export function getNegationSuffixSymbol(negationFormat: string) {
+  return negationFormat === 'parentheses' ? ')' : '';
 }
 
 //spilt a float number into different parts beforeDecimal, afterDecimal, and negation
@@ -54,10 +66,10 @@ export function fixLeadingZero(numStr?: string) {
   const isNegative = numStr[0] === '-';
   if (isNegative) numStr = numStr.substring(1, numStr.length);
   const parts = numStr.split('.');
-  const beforeDecimal = parts[0].replace(/^0+/,'') || '0';
+  const beforeDecimal = parts[0].replace(/^0+/, '') || '0';
   const afterDecimal = parts[1] || '';
 
-  return `${isNegative ? '-': ''}${beforeDecimal}${afterDecimal ? `.${afterDecimal}` : ''}`;
+  return `${isNegative ? '-' : ''}${beforeDecimal}${afterDecimal ? `.${afterDecimal}` : ''}`;
 }
 
 /**
@@ -67,7 +79,7 @@ export function fixLeadingZero(numStr?: string) {
 export function limitToScale(numStr: string, scale: number, fixedDecimalScale: boolean) {
   let str = ''
   const filler = fixedDecimalScale ? '0' : '';
-  for (let i=0; i<=scale - 1; i++) {
+  for (let i = 0; i <= scale - 1; i++) {
     str += numStr[i] || filler;
   }
   return str;
@@ -82,7 +94,7 @@ export function roundToPrecision(numStr: string, scale: number, fixedDecimalScal
   if (['', '-'].indexOf(numStr) !== -1) return numStr;
 
   const shoudHaveDecimalSeparator = numStr.indexOf('.') !== -1 && scale;
-  const {beforeDecimal, afterDecimal, hasNagation} = splitDecimal(numStr);
+  const { beforeDecimal, afterDecimal, hasNagation } = splitDecimal(numStr);
   const roundedDecimalParts = parseFloat(`0.${afterDecimal || '0'}`).toFixed(scale).split('.');
   const intPart = beforeDecimal.split('').reverse().reduce((roundedStr, current, idx) => {
     if (roundedStr.length > idx) {
@@ -150,10 +162,10 @@ export function findChangedIndex(prevValue: string, newValue: string) {
     && newLength - j > i
     && prevLength - j > i
   ) {
-       j++;
-    }
+    j++;
+  }
 
-  return {start: i, end: prevLength - j};
+  return { start: i, end: prevLength - j };
 }
 
 /*
@@ -163,7 +175,7 @@ export function clamp(num: number, min: number, max: number) {
   return Math.min(Math.max(num, min), max);
 }
 
-export function getCurrentCaretPosition(el: HTMLInputElement ) {
+export function getCurrentCaretPosition(el: HTMLInputElement) {
   /*Max of selectionStart and selectionEnd is taken for the patch of pixel and other mobile device caret bug*/
   return Math.max(el.selectionStart, el.selectionEnd);
 }
