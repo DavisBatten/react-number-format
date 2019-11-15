@@ -698,8 +698,9 @@ class NumberFormat extends React.Component {
     //update state if value is changed
     if (formattedValue !== lastValue) {
       this.setState({value : formattedValue, numAsString}, () => {
-        onValueChange(this.getValueObject(formattedValue, numAsString));
-        onUpdate();
+        const valueObj = this.getValueObject(formattedValue, numAsString);
+        onValueChange(valueObj);
+        onUpdate(valueObj);
       });
     } else {
       onUpdate();
@@ -727,8 +728,8 @@ class NumberFormat extends React.Component {
       formattedValue = lastValue;
     }
 
-    this.updateValue({ formattedValue, numAsString, inputValue, input: el }, () => {
-      props.onChange(e);
+    this.updateValue({ formattedValue, numAsString, inputValue, input: el }, (valueObj?) => {
+      props.onChange(e, valueObj);
     });
 
   }
