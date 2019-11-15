@@ -181,8 +181,8 @@ function noop() {}
 function returnTrue() {
   return true;
 }
-function charIsNumber(char) {
-  return !!(char || '').match(/\d/);
+function charIsNumber(_char) {
+  return !!(_char || '').match(/\d/);
 }
 function escapeRegExp(str) {
   return str.replace(/[-[\]/{}()*+?.\\^$|]/g, "\\$&");
@@ -424,11 +424,11 @@ function (_React$Component) {
       selectionStart: 0,
       selectionEnd: 0
     };
-    _this.onChange = _this.onChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.onKeyDown = _this.onKeyDown.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.onMouseUp = _this.onMouseUp.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.onFocus = _this.onFocus.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.onBlur = _this.onBlur.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
+    _this.onKeyDown = _this.onKeyDown.bind(_assertThisInitialized(_this));
+    _this.onMouseUp = _this.onMouseUp.bind(_assertThisInitialized(_this));
+    _this.onFocus = _this.onFocus.bind(_assertThisInitialized(_this));
+    _this.onBlur = _this.onBlur.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1072,8 +1072,10 @@ function (_React$Component) {
           value: formattedValue,
           numAsString: numAsString
         }, function () {
-          onValueChange(_this2.getValueObject(formattedValue, numAsString));
-          onUpdate();
+          var valueObj = _this2.getValueObject(formattedValue, numAsString);
+
+          onValueChange(valueObj);
+          onUpdate(valueObj);
         });
       } else {
         onUpdate();
@@ -1104,8 +1106,8 @@ function (_React$Component) {
         numAsString: numAsString,
         inputValue: inputValue,
         input: el
-      }, function () {
-        props.onChange(e);
+      }, function (valueObj) {
+        props.onChange(e, valueObj);
       });
     }
   }, {
@@ -1170,9 +1172,8 @@ function (_React$Component) {
       var isPatternFormat = typeof format === 'string';
       this.selectionBeforeInput = {
         selectionStart: selectionStart,
-        selectionEnd: selectionEnd //Handle backspace and delete against non numerical/decimal characters or arrow keys
-
-      };
+        selectionEnd: selectionEnd
+      }; //Handle backspace and delete against non numerical/decimal characters or arrow keys
 
       if (key === 'ArrowLeft' || key === 'Backspace') {
         expectedCaretPosition = selectionStart - 1;
