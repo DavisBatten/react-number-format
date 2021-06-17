@@ -1,7 +1,7 @@
 /// <reference types="react" />
 
 //exclude types from the InputHTMLAttributes
-declare const {defaultValue, value, ...inputAttributes}: React.InputHTMLAttributes<HTMLInputElement>;
+declare const { defaultValue, value, ...inputAttributes }: React.InputHTMLAttributes<HTMLInputElement>;
 type InputAttributes = typeof inputAttributes;
 
 
@@ -44,6 +44,7 @@ declare module "react-number-format" {
     isNumericString?: boolean;
     customInput?: React.ComponentType<any>;
     allowNegative?: boolean;
+    negationFormat?: 'minus' | 'parentheses';
     allowEmptyFormatting?: boolean;
     onValueChange?: (values: NumberFormatValues) => void;
     /**
@@ -54,7 +55,7 @@ declare module "react-number-format" {
      * onFocus: Function;
      * onBlur: Function;
      */
-    type?: 'text' | 'tel'  | 'password';
+    type?: 'text' | 'tel' | 'password';
     isAllowed?: (values: NumberFormatValues) => boolean;
     renderText?: (formattedValue: string) => React.ReactNode;
     getInputRef?: ((el: HTMLInputElement) => void) | React.Ref<any>;
@@ -62,6 +63,6 @@ declare module "react-number-format" {
     [key: string]: any;
   }
 
-  class NumberFormat extends React.Component<NumberFormatProps, any> {}
+  class NumberFormat extends React.Component<NumberFormatProps, any> { }
   export default NumberFormat;
 }
