@@ -1,7 +1,7 @@
 {
-  "name": "react-number-format",
+  "name": "@buildertrend/react-number-format",
   "description": "React component to format number in an input or as a text.",
-  "version": "4.3.1",
+  "version": "4.3.3",
   "main": "lib/number_format.js",
   "module": "dist/react-number-format.es.js",
   "author": "Sudhanshu Yadav",
@@ -9,11 +9,10 @@
   "types": "typings/number_format.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/s-yadav/react-number-format"
+    "url": "git+https://github.com/buildertrend/react-number-format"
   },
   "bugs": {
-    "mail": "sudhanshuyadav2@gmail.com",
-    "url": "https://github.com/s-yadav/react-number-format/issues"
+    "url": "https://github.com/buildertrend/react-number-format"
   },
   "keywords": [
     "react-component",
@@ -92,5 +91,11 @@
   },
   "dependencies": {
     "prop-types": "^15.7.2"
+  },
+  "homepage": "https://github.com/buildertrend/react-number-format",
+  "directories": {
+    "example": "example",
+    "lib": "lib",
+    "test": "test"
   }
 }
