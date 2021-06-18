@@ -1,8 +1,8 @@
 /**
- * react-number-format - 4.3.1
+ * @buildertrend/react-number-format - 4.3.3
  * Author : Sudhanshu Yadav
- * Copyright (c) 2016, 2019 to Sudhanshu Yadav, released under the MIT license.
- * https://github.com/s-yadav/react-number-format
+ * Copyright (c) 2016, 2021 to Sudhanshu Yadav, released under the MIT license.
+ * git+https://github.com/buildertrend/react-number-format
  */
 
 import React from 'react';
